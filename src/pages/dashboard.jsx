@@ -19,7 +19,7 @@ const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const {user} = UrlState();
   const {loading, error, data: urls, fn: fnUrls} = useFetch(getUrls, user.id);
-  console.log(urls)
+  //console.log(urls)
   const {
     loading: loadingClicks,
     data: clicks,
@@ -28,15 +28,17 @@ const Dashboard = () => {
     getClicksForUrls,
     urls?.map((url) => url.id)
   );
-  console.log(clicks)
+  //console.log(clicks)
 
   useEffect(() => {
     fnUrls();
   }, []);
 
-  const filteredUrls = urls?.filter((url) =>
-    url.Title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredUrls = (urls || []).filter((url) =>
+  (url.title || "")
+    .toLowerCase()
+    .includes(searchQuery.toLowerCase())
+);
 
   useEffect(() => {
     if (urls?.length) fnClicks();

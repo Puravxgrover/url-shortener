@@ -17,7 +17,7 @@ import useFetch from "@/hooks/use-fetch";
 import { createUrl } from "@/db/apiUrls";
 import { BeatLoader } from "react-spinners";
 import { UrlState } from "@/context";
-import QRCode from "react-qr-code"; 
+import QRCode from "react-qr-code";
 
 export function CreateLink() {
   const { user } = UrlState();
@@ -36,7 +36,10 @@ export function CreateLink() {
 
   const schema = yup.object().shape({
     title: yup.string().required("Title is required"),
-    longUrl: yup.string().url("Must be a valid URL").required("Long URL is required"),
+    longUrl: yup
+      .string()
+      .url("Must be a valid URL")
+      .required("Long URL is required"),
     customUrl: yup.string(),
   });
 
